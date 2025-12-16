@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("presence", function (Blueprint $table) {
-            $table->bigIncrements("presence_id");
-            $table->BigInteger("employee_id");
-            $table->BigInteger("schedule_id");
-            $table->date("presence_date");
+            $table->id("presence_id");
+            $table->foreignId("employee_id")->constrained("employee", "employee_id",indexName:"presence_employee");
             $table->enum("status_presence", ["Present", "Absent", "Sick", "Permission"]);
+            $table->date("presence_date");
+            $table->datetime("checkin");
+            $table->datetime("checkout");
+            $table->timestamps();
         });
     }
 

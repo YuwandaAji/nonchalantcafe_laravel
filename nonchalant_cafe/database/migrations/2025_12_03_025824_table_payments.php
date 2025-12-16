@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("payment", function (Blueprint $table) {
-            $table->bigIncrements("payment_id");
+            $table->id("payment_id");
             $table->string("payment_name");
             $table->enum("payment_category", ["E-Wallet", "E-Bank", "COC", "COD"]);
-            $table->enum("payment_status", ["Active", "Inactive"]);
+            $table->boolean("payment_status");
+            $table->timestamps();
         });
     }
 

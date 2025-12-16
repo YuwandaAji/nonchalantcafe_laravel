@@ -12,14 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("employee", function (Blueprint $table) {
-            $table->bigIncrements("id");
+            $table->id("employee_id");
             $table->string("employee_name");
             $table->string("employee_address");
             $table->string("employee_number");
+            $table->boolean("employee_gender");
             $table->string("employee_email");
+            $table->string("employee_password");
             $table->date("employee_date_born");
             $table->enum("employee_role", ["Waiter", "Barista", "Manager", "Courier", "Chasier"]);
             $table->integer("employee_salary");
+            $table->date("employee_date_join");
+            $table->string("employee_img");
+            $table->timestamps();
         });
     }
 

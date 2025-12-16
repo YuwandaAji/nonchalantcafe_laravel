@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("feedback", function (Blueprint $table) {
-            $table->bigIncrements("feedback_id");
-            $table->integer("customer_id");
-            $table->date("feedback_date");
+            $table->id("feedback_id");
+            $table->foreignId("sales_id")->constrained("sales","sales_id",indexName:"feedback_sales");
             $table->integer("rating");
             $table->string("comment");
+            $table->timestamps();
         });
     }
 

@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("schedule", function (Blueprint $table) {
-            $table->bigIncrements("schedule_id");
-            $table->Integer("employee_id");
-            $table->enum("shift", ["Siang", "Malam"]);
+            $table->id("schedule_id");
+            $table->boolean("shift");
             $table->enum("schedule_day", ["Monday","Tuesday", "Wednesday", "Thurstday", "Friday", "Saturday", "Sunday"]);
-
+            $table->timestamps();
         });
     }
 

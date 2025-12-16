@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("sales", function (Blueprint $table) {
-            $table->bigIncrements("sales_id");
-            $table->integer("customer_id");
-            $table->date("sales_date");
+            $table->id("sales_id");
+            $table->foreignId("customer_id")->constrained("customer", "customer_id",indexName:"sales_customer");
+            $table->foreignId("payment_id")->constrained("payment","payment_id",indexName:"slaes_payment");
+            $table->enum("sales_status", ["New", "Prepared", "Delelivery", "Done"]);
+            $table->boolean("pay_status");
+            $table->timestamps();
         });
     }
 
