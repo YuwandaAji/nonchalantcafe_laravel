@@ -14,4 +14,8 @@ class Customer extends Model {
     public function sales(): HasMany {
         return $this->hasMany(Sales::class, "sales_id");
     }
+    public function sales(){
+    // customer_id adalah primary key di table_customers.php
+    return $this->hasMany(Sales::class, 'customer_id', 'customer_id');
+}
 }
