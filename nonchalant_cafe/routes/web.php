@@ -13,8 +13,16 @@ Route::prefix('cashier')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('customer/homepage');
 });
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('register'); // Pastikan Anda punya file resources/views/register.blade.php
+})->name('register');
 
 Route::get('/customers', function () {
     return view('customers');
