@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string("customer_name");
             $table->string("customer_email");
             $table->string("customer_password");
-            $table->string("customer_address");
-            $table->string("customer_number");
-            $table->date("customer_dateborn");
-            $table->string("customer_img");
+            $table->string("customer_address")->nullable();
+            $table->string("customer_number")->nullable();
+            $table->date("customer_dateborn")->nullable();
+            $table->string("customer_img")->nullable();
             $table->timestamps();
         });
     }

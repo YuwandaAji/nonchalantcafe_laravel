@@ -31,7 +31,7 @@
     </form>
 </div>
 
-        <div class="order-history" style="flex: 1; margin-left: 100px;">
+        {{-- <div class="order-history" style="flex: 1; margin-left: 100px;">
             <h3>Order History</h3>
             @if($history->isEmpty())
                 <p>You haven't placed any orders yet.</p>
@@ -53,6 +53,6 @@
                     </tbody>
                 </table>
             @endif
-        </div>
+        </div> --}}
     </div>
 </div>

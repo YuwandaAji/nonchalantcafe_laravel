@@ -46,8 +46,10 @@
       </div>
 
       <div class="navbar-extra">
-        <a href="#" id="search-button"><i data-feather="search"></i></i></a>
-        <a href="{{ url('/cart') }}"><i data-feather="shopping-cart"></i></i></a>
+        <a href="{{ route('customer.profile') }}">
+    <i data-feather="user"></i>
+</a>
+        <a href=""><i data-feather="shopping-cart"></i></i></a>
         <a href="#" id="coffe-menu"><i data-feather="menu"></i></i></a>
       </div>
 
@@ -105,7 +107,7 @@
       <h2><span> Tentang</span> Kami</h2>
       <div class="row">
         <div class="about-img">
-          <img src="img/tentangkami.jpeg">
+          <img src="{{ asset('/img/customer/tentangkami.jpeg') }}">
         </div>
         <div class="content">
           <h3>Kenapa harus Nonchalant Coffe?</h3>
@@ -126,7 +128,7 @@
           <p class="menu-card-price">IDR 15K</p>
         </div>
         <div class="menu-card">
-          <img src="{{ asset('/img/customer/Menu/ americano.jpeg') }}" alt="Americano" class="menu-card-img">
+          <img src="{{ asset('/img/customer/Menu/americano.jpeg') }}" alt="Americano" class="menu-card-img">
           <h3 class="menu-card-title">- Americano -</h3>
           <p class="menu-card-price">IDR 12K</p>
         </div>
