@@ -17,4 +17,11 @@ class Order extends Model {
     public function sales(): BelongsToMany {
         return $this->belongsToMany(Sales::class, "sales","sales_id" );
     }
+
+    protected $fillable = [
+    'sales_id', 
+    'product_id', 
+    'price', 
+    'order_quantity'
+];
 }

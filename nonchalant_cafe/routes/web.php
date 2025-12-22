@@ -6,6 +6,15 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderController;
+
+// 1. Route untuk menampilkan halaman (Menu + Keranjang)
+// Diakses saat user klik icon Shop atau Cart di homepage
+Route::get('/shop', [OrderController::class, 'index'])->name('shop.index');
+
+// 2. Route untuk memproses penyimpanan pesanan ke Database
+// Dipanggil oleh fetch() di cart.js saat tombol PLACE ORDER diklik
+Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 Route::get('/account', [ProfileController::class, 'show'])
     ->name('customer.profile')

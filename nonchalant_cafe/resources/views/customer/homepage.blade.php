@@ -49,45 +49,15 @@
         <a href="{{ route('customer.profile') }}">
     <i data-feather="user"></i>
 </a>
-        <a href=""><i data-feather="shopping-cart"></i></i></a>
+        <a href="{{ route('shop.index') }}">
+    <i data-feather="shopping-bag"></i>
+</a>
+
+<a href="{{ route('shop.index') }}">
+    <i data-feather="shopping-cart"></i>
+</a>
         <a href="#" id="coffe-menu"><i data-feather="menu"></i></i></a>
       </div>
-
-      <!-- Search Form Start -->
-       <div class="search-form">
-        <input type="search" id="search-box" placeholder="cari disini...">
-        <label for="search-box"><i data-feather="search"></i></label>
-       </div>
-      <!-- Search Form End -->
-
-      <!-- Cart Section start-->
-       <div class="shopping-cart">
-        <div class="cart-item">
-          <img src="img/Menu/cappucino.jpeg" alt="Cappucino">
-          <div class="detail-pesanan">
-            <h3>Cappucino</h3>
-            <div class="item-price">14K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-        <div class="cart-item">
-          <img src="img/Menu/cappucino.jpeg" alt="Cappucino">
-          <div class="detail-pesanan">
-            <h3>Cappucino</h3>
-            <div class="item-price">14K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-        <div class="cart-item">
-          <img src="img/Menu/cappucino.jpeg" alt="Cappucino">
-          <div class="detail-pesanan">
-            <h3>Cappucino</h3>
-            <div class="item-price">14K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-       </div>
-     <!-- Cart section end -->
 
      </nav>
     <!-- Navbar End -->
@@ -154,151 +124,6 @@
         </div>
       </div>
      </section>
-    <!-- Menu section end -->
-
-     <!-- Products Section start -->
-    <!-- <section class="products" id="products">
-      <h2><span>Online</span> Delivery</h2>
-      <p>
-        Nikmati cita rasa kafe tanpa harus meninggalkan rumah. Pesan sekarang, dan biarkan aroma kopi segar menemani Anda dalam hitungan menit.
-      </p>
-
-      <div class="row">
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="img/Menu/americano.jpeg" alt="Americano" />
-          </div>
-          <div class="product-content">
-            <h3>Americano</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 12K <span>IDR 24K</span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="img/Menu/espreso.jpg" alt="Espresso" />
-          </div>
-          <div class="product-content">
-            <h3>Espresso</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 15K <span>IDR 30K</span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="img/Menu/cappucino.jpeg" alt="Cappucino" />
-          </div>
-          <div class="product-content">
-            <h3>Cappucino</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-            </div>
-            <div class="product-price">IDR 14K <span>IDR 29K</span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="img/Menu/croissants.jpeg" alt="Croissants" />
-          </div>
-          <div class="product-content">
-            <h3>Croissants</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 23K <span>IDR 32K</span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="img/Menu/waffles.jpeg" alt="Waffles" />
-          </div>
-          <div class="product-content">
-            <h3>Wafffles</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-            </div>
-            <div class="product-price">IDR 25K <span>IDR 39K</span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="img/Menu/nonchawidch.jpeg" alt="Nonchawidch" />
-          </div>
-          <div class="product-content">
-            <h3>Cappucino</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-            </div>
-            <div class="product-price">IDR 39K <span>IDR 50K</span></div>
-          </div>
-        </div>
-      </div>
-    </section> -->
-    <!-- Products Section end -->
 
     <!-- Contact section start -->
      <section id="contact" class="contact">
@@ -323,10 +148,9 @@
         </form>
       </div>
     </section>
-
-     <!-- Contact section end -->
+    <!-- Contact section end -->
      
-     <!-- Footer start -->
+    <!-- Footer start -->
       <footer>
         <div class="socials">
           <a href="#"><i data-feather="instagram"></i></a>
@@ -348,7 +172,7 @@
       </footer>
     <!-- Footer End -->
 
-    <!-- Modal Box Item Detail Start -->
+    {{-- <!-- Modal Box Item Detail Start -->
      <div class="modal" id="item-detail-modal">
       <div class="modal-container">
         <a href="#" class="close-icon"><i data-feather="x"></i></a>
@@ -370,7 +194,7 @@
         </div>
       </div>
      </div>
-    <!-- Modal Box Item Detail End -->
+    <!-- Modal Box Item Detail End --> --}}
 
 
     <!-- Feather Icons -->
