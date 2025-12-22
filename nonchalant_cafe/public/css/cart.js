@@ -1,13 +1,13 @@
-// Inisialisasi keranjang kosong
+// 1. Inisialisasi State
 let cart = {};
+window.currentTotal = 0;
 
-// 1. Fungsi Format Rupiah agar tampilan harga rapi
+// 2. Fungsi Format Rupiah
 function formatRupiah(num) {
     return 'Rp ' + parseInt(num).toLocaleString('id-ID');
 }
 
-// 2. Fungsi Tambah ke Keranjang
-// Fungsi ini dipanggil dari tombol "ADD TO CART" di file Blade kamu
+// 3. Tambah ke Keranjang (Dipanggil dari tombol di Blade)
 window.addToCart = function(id, name, price) {
     if (cart[id]) {
         cart[id].quantity++;
@@ -21,7 +21,7 @@ window.addToCart = function(id, name, price) {
     renderCart();
 };
 
-// 3. Fungsi Update Jumlah (Tambah/Kurang)
+// 4. Update Quantity (Tambah/Kurang)
 window.updateCart = function(id, qty) {
     qty = parseInt(qty);
     if (qty > 0) {
@@ -32,13 +32,13 @@ window.updateCart = function(id, qty) {
     renderCart();
 };
 
-// 4. Fungsi Hapus Item dari Keranjang
+// 5. Hapus Item
 window.removeFromCart = function(id) {
     delete cart[id];
     renderCart();
 };
 
-// 5. Fungsi Render (Menampilkan data ke HTML)
+// 6. Render Tampilan Keranjang
 function renderCart() {
     const cartDiv = document.getElementById('cart');
     if(!cartDiv) return;
@@ -69,32 +69,59 @@ function renderCart() {
         cartDiv.appendChild(div);
     });
 
-    // Update elemen angka di UI
     document.getElementById('subtotal').textContent = formatRupiah(subtotal);
     document.getElementById('total').textContent = 'TOTAL: ' + formatRupiah(subtotal);
     
     const badge = document.getElementById('cartBadge');
     if(badge) badge.textContent = count > 0 ? count : '';
+
+    // Simpan subtotal ke global variable untuk modal
+    window.currentTotal = subtotal;
 }
 
-// 6. Logika Checkout (Kirim data ke Laravel Database)
-document.getElementById('checkoutBtn').addEventListener('click', async () => {
-    // Cek jika keranjang kosong
+// 7. Logika Modal Pembayaran
+// Muncul saat klik tombol "PLACE ORDER"
+document.getElementById('checkoutBtn').addEventListener('click', () => {
     if (Object.keys(cart).length === 0) {
-        alert('Keranjang masih kosong, yuk pilih kopi dulu!');
+        alert('Keranjang masih kosong!');
+        return;
+    }
+    
+    // Tampilkan Modal
+    document.getElementById('modalTotalText').textContent = formatRupiah(window.currentTotal);
+    document.getElementById('paymentModal').style.display = 'block';
+    
+    // Reset input uang
+    document.getElementById('cashAmount').value = '';
+    document.getElementById('changeText').textContent = 'Rp 0';
+});
+
+// Hitung Kembalian Otomatis (Input Event)
+document.getElementById('cashAmount').addEventListener('input', (e) => {
+    const cash = parseFloat(e.target.value) || 0;
+    const change = cash - window.currentTotal;
+    document.getElementById('changeText').textContent = formatRupiah(change > 0 ? change : 0);
+});
+
+// Tutup Modal
+window.closeModal = function() {
+    document.getElementById('paymentModal').style.display = 'none';
+};
+
+// 8. Konfirmasi & Simpan ke Database
+document.getElementById('confirmPayBtn').addEventListener('click', async () => {
+    const cash = parseFloat(document.getElementById('cashAmount').value) || 0;
+    
+    // Validasi uang cukup
+    if (cash < window.currentTotal) {
+        alert('Maaf, uang yang dimasukkan kurang!');
         return;
     }
 
-    // Ambil Token CSRF dari meta tag di HTML (Wajib untuk Laravel)
-    const csrfToken = document.querySelector('meta[name="csrf-token"]');
-    if (!csrfToken) {
-        alert('Error: CSRF Token tidak ditemukan. Pastikan ada <meta name="csrf-token"> di HTML.');
-        return;
-    }
-
-    // Susun data pesanan
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
     const orderData = {
-        payment_id: 1, // Default ID Payment (sesuaikan dengan isi tabel payment kamu)
+        payment_id: document.getElementById('pay_method').value,
         items: Object.entries(cart).map(([id, item]) => ({
             id: id,
             price: item.price,
@@ -103,12 +130,11 @@ document.getElementById('checkoutBtn').addEventListener('click', async () => {
     };
 
     try {
-        // Kirim data ke Route POST /order yang sudah kita buat
         const response = await fetch('/order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken.getAttribute('content'),
+                'X-CSRF-TOKEN': csrfToken,
                 'Accept': 'application/json'
             },
             body: JSON.stringify(orderData)
@@ -117,14 +143,18 @@ document.getElementById('checkoutBtn').addEventListener('click', async () => {
         const result = await response.json();
 
         if (response.ok) {
-            alert('Mantap! Pesanan kamu sudah masuk ke database.');
-            cart = {}; // Kosongkan keranjang setelah berhasil
+            const kembalian = document.getElementById('changeText').textContent;
+            alert('Transaksi Berhasil!\n' + kembalian);
+            
+            // Bersihkan data
+            cart = {};
             renderCart();
+            closeModal();
         } else {
-            alert('Waduh, gagal simpan: ' + (result.message || 'Cek kembali data kamu.'));
+            alert('Gagal: ' + result.message);
         }
     } catch (error) {
-        console.error('Error Checkout:', error);
-        alert('Koneksi ke server bermasalah.');
+        console.error('Error:', error);
+        alert('Gagal terhubung ke server.');
     }
 });
